@@ -1,12 +1,16 @@
-import React from 'react'
+import React,{ useContext } from 'react'
 import styled from 'styled-components';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import {sidebaritems} from '../data/SidebarData'
 import AddIcon from '@material-ui/icons/Add';
 import db from '../Firebase';
 import {useHistory} from 'react-router-dom';
+import ThemeContext from '../context/ThemeContext'
+import AppTheme from '../Color'
 
 function Sidebar({rooms}) {
+    const theme = useContext(ThemeContext)[0];
+    const currentTheme = AppTheme[theme];
 
     const history = useHistory();
 
@@ -27,34 +31,45 @@ function Sidebar({rooms}) {
     }
     
     return (
-        <Container>
+        <Container style = {{
+            backgroundColor: `${currentTheme.backgroundColor}`,
+            color: `${currentTheme.textColor}`,
+        }}>
             <WorkSpaceContainer>
-                <Name>
+                <Name style={{
+                    color:`${currentTheme.textColor}`
+                }}>
                     HiteshProgrammer
                 </Name>
                 <NewMessage>
                     <AddCircleOutlineIcon />
                 </NewMessage>
             </WorkSpaceContainer>
-            <MainChannels>
+            <MainChannels >
                 {
                     sidebaritems.map(item => (
-                        <MainChannelItem>
+                        <MainChannelItem style={{
+                            color:`${currentTheme.textColor}`
+                        }}>
                             {item.icon}
                             {item.text}
                         </MainChannelItem>
                     ))
                 }
             </MainChannels>
-            <ChannelsContainer>
-                <NewChannelContainer>
+            <ChannelsContainer >
+                <NewChannelContainer style={{
+                    color:`${currentTheme.textColor}`
+                }}>
                     <div>
                         Channels
                     </div>
                     <AddIcon onClick={addChannel}/>
 
                 </NewChannelContainer>
-                <ChannelLists>
+                <ChannelLists style={{
+                    color:`${currentTheme.textColor}`
+                }}>
                     {
                         rooms.map(item => (
                             <Channel onClick={() => goToChannel(item.id)}>
@@ -71,7 +86,7 @@ function Sidebar({rooms}) {
 
 export default Sidebar
 const Container = styled.div`
-    background:#0B173B;
+    
 
 `
 const WorkSpaceContainer = styled.div`
@@ -118,7 +133,7 @@ const MainChannelItem = styled.div`
     cursor:pointer;
     transition:0.5s;
     :hover{
-        background:#38298C;
+        background:#12B0E8;
         transition:0.5s;
         transform: scale(1.008072);
     }
@@ -148,7 +163,7 @@ const Channel = styled.div`
     cursor:pointer;
     transition:0.5s;
     :hover{
-        background:#38298C;
+        background:#12B0E8;
         transition:0.5s;
         transform: scale(1.008072);
     }

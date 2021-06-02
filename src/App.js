@@ -9,11 +9,12 @@ import db from './Firebase';
 import {useEffect,useState} from 'react';
 import {auth,provider} from './Firebase';
 import SelectChannel from './components/SelectChannel';
+import ThemeContext from './context/ThemeContext'
 
 function App() {
 
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-  
+  const themeHook = useState("light");
   const [rooms,setRooms] = useState([]);
 
 
@@ -29,6 +30,7 @@ function App() {
       setRooms(snap.docs.map((doc) => {
         return {id:doc.id, name:doc.data().name, }
       })
+      
       )
     })
 
@@ -40,29 +42,35 @@ function App() {
 
   
 
+  
+
 
   return (
     <div className="App">
+      
       <Router>
         {
           !user ?
           <Login  setUser = {setUser}/>
           :
-        
-          <Container>
-            <Header signOut={signOut}  user={user}/>
-            <Main>
-              <Sidebar rooms={rooms} />
-              <Switch>
-                <Route path ="/room/:channelId">
-                  <Chat user={user} />
-                </Route>
-                <Route path="/">
-                  <SelectChannel />
-                </Route>
-              </Switch>
-              </Main>
-          </Container>
+          <ThemeContext.Provider value = {themeHook}>
+            
+          
+              <Container>
+                <Header signOut={signOut}  user={user}/>
+                <Main>
+                  <Sidebar rooms={rooms} />
+                  <Switch>
+                    <Route path ="/room/:channelId">
+                      <Chat user={user} />
+                    </Route>
+                    <Route path="/">
+                      <SelectChannel />
+                    </Route>
+                  </Switch>
+                  </Main>
+              </Container>
+          </ThemeContext.Provider>
         } 
       </Router>
        

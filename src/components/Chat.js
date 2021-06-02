@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from 'react'
+import React,{useEffect,useState, useContext} from 'react'
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import styled from 'styled-components';
 import InfoIcon from '@material-ui/icons/Info';
@@ -8,10 +8,12 @@ import db from '../Firebase'
 import { useParams } from "react-router-dom";
 import firebase from 'firebase';
 
+
 function Chat({user})     {
     // console.log("Name"+user.name);
     // console.log("Photo"+user.photo);
 
+   
     let { channelId } = useParams();
     const [channel,setChannel] = useState();
     const [messages,setMessages] = useState([]);

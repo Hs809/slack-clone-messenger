@@ -1,23 +1,54 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import ThemeContext from '../context/ThemeContext'
+import AppTheme from '../Color'
 
 function Header({user, signOut}) {
+    const theme =  useContext(ThemeContext)[0]
+    const currentTheme = AppTheme[theme]
+    const [themeMode, setThemeMode] = useContext(ThemeContext);
     return (
-        <Container>
+        <Container style = {{
+            backgroundColor: `${currentTheme.backgroundColor}`
+        }}>
+            <button
+            style = {{
+                border: "none",
+                padding: "7px 15px",
+                cursor: "pointer",
+                backgroundColor: "#23C4ED",
+                position: "absolute",
+                left: "10px",
+                color: `${currentTheme.backgroundColor}`,
+                borderRadius: "5px",
+                   
+
+
+            
+
+            }}
+               onClick = {() => {setThemeMode(themeMode === "light" ? "dark" : "light");}}
+            >{themeMode === "light" ? "Dark Theme" : "Light Theme"}</button>
             <Main>
-                <AccessAlarmIcon />
+                <AccessAlarmIcon style={{
+                    color:`${currentTheme.textColor}`
+                }} />
                 <SearchContainer>
-                    <Search>
+                    <Search >
                         <input type="text" placeholder="Search..."/>
                     </Search>
                 </SearchContainer>
-                <HelpOutlineIcon />
+                <HelpOutlineIcon  style={{
+                    color:`${currentTheme.textColor}`
+                }}/>
 
             </Main>
             <UserContainer>
-                <Name>
+                <Name style={{
+                    color:`${currentTheme.textColor}`
+                }}>
                     {user.name}
                 </Name>
                 <UserImage onClick={signOut}>
