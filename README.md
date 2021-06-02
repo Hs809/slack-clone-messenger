@@ -1,4 +1,4 @@
-You can see the demo website over here: https://slack-messenger-6a320.web.app/
+You can see the demo website over here:
 
 Install all the packages from: npm install
 
