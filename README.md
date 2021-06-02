@@ -1,3 +1,13 @@
+You can see the demo website over here: https://slack-messenger-6a320.web.app/
+
+Install all the packages from: npm install
+
+And your are ready to go and use it 
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
