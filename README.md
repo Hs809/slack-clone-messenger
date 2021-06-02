@@ -1,8 +1,11 @@
-You can see the demo website over here:
+
 
 Install all the packages from: npm install
 
 And your are ready to go and use it 
+
+Slack-messager with theme changer
+
 
 
 
